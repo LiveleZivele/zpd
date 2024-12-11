@@ -1,0 +1,254 @@
+body {
+    background-color: #f7f3ed; 
+   
+  }
+html {
+  font-family: 'Trebuchet MS', sans-serif;
+  }
+.headline {
+    text-align: center;
+ }
+a {
+    text-decoration: none;
+    color: inherit; 
+  }
+
+.middle{
+  background-color: #f0f0f0; 
+    border: 1px solid #ccc; 
+    padding: 1%; 
+    margin: 5%; 
+    border-radius: 5px; 
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.sebar {
+  text-align: center;
+  display: flex;                
+  justify-content: center;      
+  align-items: center;         
+  gap: 2%;                    
+  height: 10%; 
+  
+}
+
+.hover {
+  display: inline-block;
+  position: relative;
+  font-size: 100%;
+  color: #333;
+  padding: 0.3%;
+}
+form:not(.form-with-checkbox) {
+  background-color: #ffffff;
+  width: 30%;
+  height: 44px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+}
+
+input:not([type="checkbox"]) {
+  all: unset;
+  font: 16px system-ui;
+  color: #000000;
+  height: 100%;
+  width: 100%;
+  padding: 6px 10px;
+ 
+}
+::placeholder {
+  color: #000000;
+  opacity: 0.7; 
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+}
+
+svg {
+  color: #363636;
+  fill: currentColor;
+  width: 24px;
+  height: 24px;
+  padding: 10px;
+}
+.sleptais {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 100%; 
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  padding: 50%;
+  width: 400%; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  z-index: 10;
+}
+
+.hover:hover .sleptais {
+  visibility: visible;
+  opacity: 1;
+}
+.sleptais p {
+  margin: 0;
+  font-size: 100%;
+  color: #333;
+  gap: 5%;
+}
+.izveles{
+  
+  display: flex; 
+  gap: 30px;
+}
+.vl {
+  border-left: 1px solid rgb(107, 96, 79);
+  height: 55%;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  top: 27%;
+}
+
+.hover2 {
+  display: inline-block;
+  position: relative;
+  font-size: 100%;
+  color: #333;
+  padding: 0.3%;
+}
+.sleptais2 {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 100%; 
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  padding: 20%;
+  width: 120%; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  z-index: 10;
+}
+.hover2:hover .sleptais2 {
+  visibility: visible;
+  opacity: 1;
+}
+#theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;  
+}
+.sleptais2 p {
+  margin: 0;
+  font-size: 100%;
+  color: #333;
+  gap: 7%;
+}
+
+.gramata{
+  display: flex;
+  align-items: center; 
+  height: 50px;
+  gap: 350px;
+}
+
+.managramata {
+  width: 100%;
+  margin: 15px auto;
+  border: 0.2px solid #ccc;
+  background-color: #e7e5de;
+  display: flex;  
+  flex-direction: column;  
+  gap: 20px;  
+}
+
+.book {
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #b9b39d;
+  border-radius: 5px;
+  display: flex;  
+  align-items: center;  
+  justify-content: space-between;
+}
+
+.book p {
+  margin: 2px 0;  
+}
+.top{
+  display: flex;
+  
+  height: 90px;
+  gap: 87%;
+}
+
+/* TUMSAIS REZIMS */
+.dark-theme{
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+body.dark-theme {
+  background-color: #121212;
+  color: rgb(78, 78, 78);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+button.dark-theme {
+  background-color: #333;
+  color: rgb(71, 71, 71);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+body.dark-theme .slide-container {
+  background-color: #242424;
+  color: rgb(78, 78, 78);
+  border-color: #000000;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+body.dark-theme .middle{
+  background-color: #242424;
+  color: rgb(78, 78, 78);
+  border-color: #000000;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme h4, 
+body.dark-theme h5,
+body.dark-theme h6,
+body.dark-theme p,
+body.dark-theme strong
+{
+    color: #b9b9b9; 
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body.dark-theme .pogagramata{
+  background-color: #3b3b3b;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+body.dark-theme .pogagramata:hover{
+  background-color: #1b1b1b;
+}
+body.dark-theme .sleptais2{
+  background-color: #242424;
+}
+body.dark-theme .sleptais{
+  background-color: #242424;
+}
+body.dark-theme .managramata{
+  background-color: #1b1b1b;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+body.dark-theme .book{
+  background-color: #3b3b3b;
+}

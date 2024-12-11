@@ -1,0 +1,78 @@
+<div class ="meiddle">
+       <h3>Izveidot profilu</h3>
+     
+       <h5>Informācija par lietotāju</h5>
+        <hr style="width: 95%; height: 0.5px; background-color: lightgray; border: none; margin-left: 0;">
+
+        <div class="topbox">
+           <form method="post" action="/register">
+         <label for="vards"><h5>Vārds <span style="color: red;">*</span></h5></label>
+         <input type="text" placeholder="" name="vards" required> 
+    
+          <div class="nexttop">
+            
+         <label for="uzvards"><h5>Uzvārds <span style="color: red;">*</span></h5></label>
+         <input type="text" placeholder="" name="uzvards" required>
+        
+          </div>
+         
+            
+          <label for="talr_num"><h5>Tālruņa numurs<span style="color: red;">*</span></h5></label>
+          <input type="text" placeholder="" name="talr_num" required> 
+
+          <div class="bottomtop">
+            
+            <label for="epasts"><h5>E-pasta adrese <span style="color: red;">*</span></h5></label>
+            <input type="text" placeholder="" name="epasts" required>
+         </div>
+
+         <h5>Autorizācijas dati</h5>
+         <hr style="width: 95%; height: 0.5px; background-color: lightgray; border: none; margin-left: 0;">
+         
+
+         <label for="parole"><h5>Parole<span style="color: red;">*</span></h5></label>
+         <input type="password" placeholder="" name="parole" required>
+         <div class="bottombottom">
+            <h6>Atkārtot paroli<span style="color: red;">*</span></h6>
+         <input type="password" placeholder="" name="parole_repeat" required> 
+         
+         </div>
+         <hr style="width: 95%; height: 0.5px; background-color: lightgray; border: none; margin-left: 0;">
+         
+
+    </div>
+    <h6><span style="color: red; position: relative; left: 85%;">* Obligāti aizpildāmie laukumi</span></h6>
+    <div class="check">
+    <input type="checkbox" id="option1">
+    <label for="option1"><span style="color: red; ">*</span>Es piekrītu lietošanas noteikumiem</label>
+    </div>
+    <hr style="width: 95%; height: 0.5px; background-color: lightgray; border: none; margin-left: 0;">
+    <div class="pogas">
+    <button type="submit" a href="/" class="pogaap">
+       <h5>Pieslēgites</h5>
+    </a>
+    </button>
+    <a href="/login" class="atp">
+        <h5>< Atpakaļ</h5>
+     </a>
+
+
+
+
+     ////////////log in
+     <h4>Pislēgties sistēmai</h4>
+         <hr style="width: 340%; height: 0.5px; background-color: lightgray; border: none;">
+         <h6>E-pasta adrese <span style="color: red;">*</span></h6>
+         <div class="inputer">
+         <input type="text" placeholder=""> 
+         </div>
+         <h6>Parole<span style="color: red;">*</span></h6>
+         <div class="inputer">
+         <input type="text" placeholder="" > 
+         </div>
+         <h6><a href="/aizparoli">Aizmirsi paroli?</a></h6>
+         <h6><span style="color: red; position: relative; left: 255%;">* Obligāti aizpildāmie laukumi</span></h6>
+         <hr style="width: 340%; height: 0.5px; background-color: lightgray; border: none;">
+         <a href="" class="loginpoga">
+            <h5>Pieslēgites</h5>
+         </a>

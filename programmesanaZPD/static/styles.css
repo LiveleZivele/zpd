@@ -1,0 +1,351 @@
+.sebar {
+  text-align: center;
+  display: flex;                
+  justify-content: center;      
+  align-items: center;         
+  gap: 2%;                    
+  height: 20%; 
+  flex-wrap:wrap;
+  }
+  #theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;  
+  }
+.headline {
+   text-align: center;
+}
+.hover {
+  display: inline-block;
+  position: relative;
+  font-size: 100%;
+  color: #333;
+  padding: 0.3%;
+}
+html {
+  font-family: 'Trebuchet MS', sans-serif;
+  }
+body {
+  background-color: #f7f3ed; 
+  transition: background-color 0.5s ease, color 0.5s ease;
+  }
+a {
+  text-decoration: none;
+  color: inherit; 
+  }
+form {
+  background-color: #ffffff;
+  width: 30%;
+  height: 44px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  }
+input {
+  all: unset;
+  font: 16px system-ui;
+  color: #000000;
+  height: 100%;
+  width: 100%;
+  padding: 6px 10px;
+  }
+::placeholder {
+  color: #000000;
+  opacity: 0.7; 
+  }
+button {
+  all: unset;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  }
+svg {
+  color: #363636;
+  fill: currentColor;
+  width: 24px;
+  height: 24px;
+  padding: 10px;
+  }
+.middle {
+  background-color: #f0f0f0; 
+  border: 1px solid #ccc; 
+  padding: 0; 
+  margin: 5%;
+  display: grid;
+  width: 90%;
+  border-radius: 5px; 
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); 
+}
+.sleptais {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 100%; 
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  padding: 50%;
+  width: 400%; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  z-index: 10;
+}
+.hover:hover .sleptais {
+  visibility: visible;
+  opacity: 1;
+}
+.sleptais p {
+  margin: 0;
+  font-size: 100%;
+  color: #333;
+  gap: 5%;
+}
+.izveles{
+  display: flex; 
+  gap: 30px;
+}
+.hover2 {
+  display: inline-block;
+  position: relative;
+  font-size: 100%;
+  color: #333;
+  padding: 0.3%;
+}
+.sleptais2 {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 100%; 
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  padding: 20%;
+  width: 120%; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  z-index: 10;
+}
+.hover2:hover .sleptais2 {
+  visibility: visible;
+  opacity: 1;
+}
+.sleptais2 p {
+  margin: 0;
+  font-size: 100%;
+  color: #333;
+  gap: 7%;
+}
+
+.pogagramata{
+  display: block;
+  width: 50%;
+  height: 10%;
+  background-color: #e5ad5b;
+  padding: 0.2%;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  text-decoration: none; 
+  color: inherit; 
+  display: flex;               
+  justify-content: center;       
+  align-items: center;  
+}
+.pogagramata:hover {
+  background-color: #af844c;
+}
+.gramcon{
+  text-align: center;
+  justify-content: center;       
+  align-items: center;  
+}
+.pogapanemt{
+  display: block;
+  width: 50%;
+  height: 10%;
+  background-color: #e5ad5b;
+  padding: 0.2%;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  text-decoration: none; 
+  color: inherit; 
+  display: flex;               
+  justify-content: center;       
+  align-items: center;  
+}
+
+
+.slider-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  overflow: hidden; 
+}
+
+.slide-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.books-container {
+  display: flex;
+  gap: 20px; 
+}
+
+.slider {
+  display: flex;
+  flex-wrap: nowrap; 
+  transition: transform 0.5s ease-in-out; 
+}
+
+.book-container {
+  display: flex;
+  gap: 20px; 
+}
+
+.book-item {
+  width: 240px; 
+  height: 580px; 
+  text-align: center;
+  position: relative;
+}
+
+.book-item img {
+  width: 100%; 
+  height: 80%; 
+  object-fit: cover; 
+  border-radius: 8px;
+}
+
+.availability-dot {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: green; 
+}
+
+.take-book-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #e5ad5b;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  width:30%;
+  height:4%;
+}
+
+.take-book-btn:hover {
+  background-color: #af844c;
+}
+
+
+.slidebutton1, .slidebutton2 {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  font-size: 24px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: black;
+  transform: translateY(-50%); 
+}
+
+.slidebutton1 {
+  left: 150px; 
+}
+
+.slidebutton2 {
+  right: 130px; 
+}
+
+.slidebutton3, .slidebutton4 {
+  position: absolute;
+  top: 118%;
+  z-index: 10;
+  font-size: 24px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: black;
+  transform: translateY(-50%); 
+}
+.slidebutton3 {
+  left: 150px;  
+}
+
+.slidebutton4{
+  right: 130px; 
+
+}
+
+/* TUMSAIS REZIMS */
+.dark-theme{
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+body.dark-theme {
+  background-color: #121212;
+  color: rgb(78, 78, 78);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+button.dark-theme {
+  background-color: #333;
+  color: rgb(71, 71, 71);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+body.dark-theme .slide-container {
+  background-color: #242424;
+  color: rgb(78, 78, 78);
+  border-color: #000000;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+body.dark-theme .middle{
+  background-color: #242424;
+  color: rgb(78, 78, 78);
+  border-color: #000000;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme h4, 
+body.dark-theme h5,
+body.dark-theme h6,
+body.dark-theme p,
+body.dark-theme strong,
+body.dark-theme button
+{
+    color: #b9b9b9; 
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+
+body.dark-theme .take-book-btn{
+  background-color: #3b3b3b;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+body.dark-theme .pogagramata:hover{
+  background-color: #1b1b1b;
+}
+body.dark-theme .sleptais2{
+  background-color: #242424;
+}
+body.dark-theme .sleptais{
+  background-color: #242424;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='profils.css') }}">
+</head>
+<body>
+<div class="headline">
+    <h2><a href="/">Virtuālā Bibliotēka</a></h2>
+</div>
+<div class="sebar">
+    <h4><a href="/manasgramatas">Manas Grāmatas</a></h4>
+    <div class="hover">
+        <h4>Pārlūkot</h4>
+        <div class="sleptais">
+            <div class="izveles">
+            <div class="pirmais">
+            <p>
+            <h3>Daiļliteratūra</h3>
+            <h6>> <a href="">Folklora</a></h6>
+            <h6>> <a href="">Dzeja</a></h6>
+            <h6>> <a href="">Romāni</a></h6>
+        </p>
+        </div>
+    
+        <div class="otrais">
+         <p>
+        <h3>Valodas Mācību Līdzekļi</h3>
+        <h6>> <a href="">Latviešu valoda</a></h6>
+        <h6>> <a href="">Angļu valoda</a></h6>
+        <h6>> <a href="">Krievu valoda</a></h6>
+        <h6>> <a href="">Citas valodas</a></h6>
+         </p>
+        </div>
+ 
+    </div>
+    </div>
+    </div>
+    <form id="form" role="search">
+    <input type="search" id="query" name="q" placeholder="Meklēt.." aria-label="Meklēt">
+    <button><svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg></button>
+    </form>
+    
+    <div class="hover2">
+    <h4><a href="/profils">👤 Profils</a></h4>
+    <div class="sleptais2">
+         <div class="izveles2">
+           <p>
+            <h6>> <a href ="">Lietotāja konts</a></h6>
+            <h6>> <a href="{{ url_for('login') }}">Pieslēgties</a></h6>
+           </p>
+         </div>
+    </div>
+    
+    </div>
+    <button id="theme-toggle"><h4>Tumšais režīms</h4></button>
+</div>
+<div class="middle">
+    <div class="left">
+        <h5 style="margin-bottom: 60px; padding-left: 20px"><a href="/manasgramatas">Manas grāmatas</a></h5>
+        <h5 style="margin-bottom: 60px; padding-left: 20px"><a href="/veloslasit">"Vēlos lasīt" saraksts</a></h5>
+        <h5 style="margin-bottom: 60px; padding-left: 20px"><a href="/izlasitasgramatas">Izlasītās grāmatas</a></h5>
+        <div class="vl"></div>
+    </div>
+    <div class="middlee">
+        <h4>Sveiki,  {% if user %} {{ user[0] }} {{ user[1] }}  
+        {% else %}
+            <p>User not found!</p>
+        {% endif %}</h4>
+            
+        <h5>Šeit atradīsi informāciju, kā arī iestatījumus, lai mainītu informāciju!</h5>
+    </div>
+    <div class="right">
+        <div class="vl2"></div>
+       <h5 style="margin-bottom: 100px;"> <a href="/iest">Iestatījumi</a></h5>
+    <div class="logoff" >
+      <form method="POST" >
+        <button type="submit"><h5 style="margin-bottom: 50px;">Izrakstīties</h5></button>
+      </form>  
+    </div>
+    </div>
+</div>
+<div class="bottom">
+    <img src="static/photos/book.png" alt="book" class="bilde">
+    <img src="static/photos/book.png" alt="book2" class="bilde">
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

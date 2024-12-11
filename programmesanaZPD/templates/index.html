@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<div class="headline">
+    <h2>Virtuālā Bibliotēka</h2>
+</div>
+<div class="sebar">
+  <strong><a href="{{ url_for('manasgramatas') if session['user_id'] else url_for('login') }}">Manas Gramatas</a></strong>
+    <div class="hover">
+        <h4>Pārlūkot</h4>
+        <div class="sleptais">
+            <div class="izveles">
+            <div class="pirmais">
+            <p>
+            <h3>Daiļliteratūra</h3>
+            <h6>> <a href="">Folklora</a></h6>
+            <h6>> <a href="">Dzeja</a></h6>
+            <h6>> <a href="">Romāni</a></h6>
+        </p>
+        </div>
+    
+        <div class="otrais">
+         <p>
+        <h3>Valodas Mācību Līdzekļi</h3>
+        <h6>> <a href="">Latviešu valoda</a></h6>
+        <h6>> <a href="">Angļu valoda</a></h6>
+        <h6>> <a href="">Krievu valoda</a></h6>
+        <h6>> <a href="">Citas valodas</a></h6>
+         </p>
+        </div>
+ 
+    </div>
+    </div>
+    </div>
+    <form id="form" role="search">
+    <input type="search" id="query" name="q" placeholder="Meklēt.." aria-label="Meklēt">
+    <button><svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg></button>
+    </form>
+    
+    <div class="hover2">
+    <h4><a href="{{ url_for('profils') }}">👤 Profils</a></h4>
+    <div class="sleptais2">
+         <div class="izveles2">
+           <p>
+            <h6>> <a href ="/profils">Lietotāja konts</a></h6>
+            <h6>> <a href="/login">Pieslēgties</a></h6>
+           </p>
+         </div>
+    </div>
+    </div>
+   
+    <button id="theme-toggle"><h4>Tumšais režīms</h4></button> 
+    
+</div>
+<div class="middle">
+<h3>Visvairāk pirktās grāmatas latviešu valodā</h3>
+
+<div class="slide-container">
+    <!-- First 6 books -->
+    <div class="books-container">
+      <div class="slider" id="slider1">
+        <div class="gramatas">
+          <div class="book-container">
+            {% for book in first_6_books %}
+              <div class="book-item">
+                <img src="{{ url_for('static', filename='photos/' + book[0]|string + '.jpg') }}" alt="{{ book[1] }}">
+                <p>{{ book[1] }}</p>
+                <div class="availability-dot" style="background-color: {{ 'green' if book[3] == 1 else 'red' }};"></div>
+                <button class="take-book-btn" data-book-id="{{ book[0] }}">Paņemt</button>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+    <div class="slidebutton1">
+        <button onclick="slideNext('slider1')"><b>←</b></button>
+      </div>
+      <div class="slidebutton2">
+        <button onclick="slideBack('slider1')"><b>→</b></button>
+      </div>
+    
+      &nbsp;
+
+<hr style="width: 95%; height: 0.5px; background-color: lightgray; border: none; margin-left: 0;">
+<h3>Jaunas grāmatas</h3>
+
+<div class="slide-container">
+    <!-- Last 6 books -->
+    <div class="slider" id="slider2">
+      <div class="gramatas">
+        <div class="book-container">
+          {% for book in last_6_books %}
+          <div class="book-item">
+            <img src="{{ url_for('static', filename='photos/' + book[0]|string + '.jpg') }}" alt="{{ book[1] }}">
+            <p>{{ book[1] }}</p>
+            <div class="availability-dot" style="background-color: {{ 'green' if book[3] == 1 else 'red' }};"></div>
+            <button class="take-book-btn" data-book-id="{{ book[0] }}">Paņemt</button>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="slidebutton3">
+        <button onclick="slideNext('slider2')"><b>←</b></button>
+      </div>
+      <div class="slidebutton4">
+        <button onclick="slideBack('slider2')"><b>→</b></button>
+      </div>
+    
+      &nbsp;
+
+
+<script>
+    let currentSlide = 0;
+    const booksPerSlide = 3;  
+
+
+    const slider1 = document.getElementById('slider1');
+    const slider2 = document.getElementById('slider2');
+    const totalBooks = {{ first_6_books | length }};  
+
+
+    function slideNext(sliderId) {
+        currentSlide++;
+        if (currentSlide * booksPerSlide >= totalBooks) {
+           currentSlide = 0; 
+        }
+        updateSliderPosition(sliderId);
+    }
+
+
+    function slideBack(sliderId) {
+        currentSlide--;
+        if (currentSlide < 0) {
+            currentSlide = Math.floor(totalBooks / booksPerSlide) - 1; 
+        }
+        updateSliderPosition(sliderId);
+    }
+    function updateSliderPosition(sliderId) {
+         const offset = currentSlide * (250 + 20); 
+  
+
+         if (sliderId === 'slider1') {
+           slider1.style.transform = `translateX(-${offset}px)`;
+        } else if (sliderId === 'slider2') {
+           slider2.style.transform = `translateX(-${offset}px)`;
+     }
+    }
+</script>
+<script>
+    document.querySelectorAll('.take-book-btn').forEach(button => {
+      button.addEventListener('click', function () {
+        const bookId = this.getAttribute('data-book-id');
+  
+        fetch('/take_book', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ book_id: bookId }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('Book taken successfully!');
+            window.location.reload();
+          } else {
+            alert(data.error || 'An error occurred.');
+          }
+        });
+      });
+    });
+  </script>
+  
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
+<!--<h6>> <a href="">    </a></h6>-->
