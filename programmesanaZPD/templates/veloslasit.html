@@ -64,8 +64,37 @@
         <h6>Idzēst</h6>
         <h6></h6>
     </div>
-    
+    <div class="managramata">
+  <form method="POST" class="gramatas" action="{{ url_for('wishlist') }}">
+    {% for book in wishlist_books %}
+      <div class="book">
+        <p class="bookinfo">
+          <span class="book-title">{{ book[1] }}</span>
+          <span class="book-author">{{ book[2] }}</span>
+          
+          {% if book[3] %}
+            {{ book[3][:10] }} 
+          {% else %}
+            - Nav pieejams datums
+          {% endif %}
+          
+          
+          <input type="checkbox" name="remove_books" value="{{ book[0] }}" onchange="this.form.submit()"> 
+        </p>
+      </div>
+    {% endfor %}
+  </form>
 </div>
+</div>
+<script>
+ 
+  document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+      
+      this.form.submit();
+    });
+  });
+</script>
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

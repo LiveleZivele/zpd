@@ -72,10 +72,10 @@
             {% if taken_books %}
                 {% for book in taken_books %}
                     <div class="book">
-                        <p>{{ book[0] }}</p> <!-- Book Title -->
-                        <p>{{ book[1] }}</p> <!-- Author -->
-                        <p>{{ book[2] }}</p> <!-- Taken Date -->
-                        <p>{{ book[3] }}</p> <!-- Return Date -->
+                        <p>{{ book[0] }}</p> 
+                        <p>{{ book[1] }}</p> 
+                        <p>{{ book[2] }}</p> 
+                        <p>{{ book[3] }}</p> 
                         <form action="{{ url_for('return_book', book_id=book[4]) }}" method="POST" id="check" class="form-with-checkbox">
                             <label>
                                 <input type="checkbox" name="return_book" onchange="this.form.submit()">

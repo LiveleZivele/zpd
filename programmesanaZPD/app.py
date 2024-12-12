@@ -4,11 +4,12 @@ from functools import wraps
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from flask_bcrypt import Bcrypt
 from datetime import datetime, timedelta
+import sqlite3
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
 bcrypt = Bcrypt(app)
-
+db = get_db_connection()
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -22,17 +23,30 @@ def home():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # pirmas sesas gramatas
+   
     cursor.execute('SELECT id, nosaukums, autors, pieejams FROM gramata LIMIT 6')
     first_6_books = cursor.fetchall()
 
-    # pedejas sesas gramatas
+    
     cursor.execute('SELECT id, nosaukums, autors, pieejams FROM gramata ORDER BY id DESC LIMIT 6')
     last_6_books = cursor.fetchall()
 
+    user_id = session.get('user_id')
+    liked_books = []
+    
+    if user_id:
+        cursor.execute('SELECT id_gramata FROM velas_lasit_gramatas WHERE id_lietotajs = ?', (user_id,))
+        liked_books = [row[0] for row in cursor.fetchall()]
+
     conn.close()
 
-    return render_template('index.html', first_6_books=first_6_books, last_6_books=last_6_books)
+   
+    return render_template('index.html', 
+                           first_6_books=first_6_books, 
+                           last_6_books=last_6_books, 
+                           liked_books=liked_books)
+
+
 
 @app.route('/take_book', methods=['POST'])
 @login_required
@@ -226,9 +240,7 @@ def manasgramatas():
 
     return render_template('manasgramatas.html', taken_books=taken_books)
     
-@app.route('/aizparoli')
-def aizparoli():
-    return render_template('aizparoli.html')
+
 
 @app.route('/profils',methods=['GET' , 'POST'])
 @login_required
@@ -254,10 +266,36 @@ def profils():
     else:
         return render_template('login.html') 
     
-@app.route('/veloslasit')
-@login_required
-def veloslasit():
-    return render_template('veloslasit.html')
+@app.route('/veloslasit', methods=['GET', 'POST'])
+def wishlist():
+    user_id = session.get('user_id')
+    if user_id:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+      
+        cursor.execute('''SELECT g.id, g.nosaukums, g.autors, v.ielikts_saraksta 
+                         FROM velas_lasit_gramatas v
+                         JOIN gramata g ON v.id_gramata = g.id
+                         WHERE v.id_lietotajs = ?''', (user_id,))
+        wishlist_books = cursor.fetchall()
+
+        if request.method == 'POST':
+           
+            book_id = request.form.get('remove_books')
+            if book_id:
+                
+                cursor.execute('''DELETE FROM velas_lasit_gramatas 
+                                  WHERE id_gramata = ? AND id_lietotajs = ?''', 
+                               (book_id, user_id))
+                conn.commit()
+
+            
+            return redirect(url_for('wishlist'))
+
+        conn.close()
+        return render_template('veloslasit.html', wishlist_books=wishlist_books)
+    return redirect(url_for('login'))
 
 @app.route('/izlasitasgramatas', methods=['GET'])
 @login_required
@@ -337,6 +375,44 @@ def iest():
                     message = "Nepareizs pašreizējais epasts"
 
     return render_template('iestatijumi.html', message=message)
+
+
+
+@app.route('/add_to_wishlist', methods=['POST'])
+def add_to_wishlist():
+    user_id = session.get('user_id')
+    book_id = request.form.get('book_id')  
+
+    if not user_id or not book_id:  
+        return "Ludzu pieslēdzaties sistēmā", 500  
+
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+       
+        cursor.execute('''
+            SELECT * FROM velas_lasit_gramatas 
+            WHERE id_lietotajs = ? AND id_gramata = ?
+        ''', (user_id, book_id))
+        existing_entry = cursor.fetchone()
+
+        if existing_entry:
+            conn.close()
+            return "Book already in wishlist", 400 
+
+       
+        cursor.execute('''
+            INSERT INTO velas_lasit_gramatas (id_lietotajs, id_gramata)
+            VALUES (?, ?)
+        ''', (user_id, book_id))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('wishlist'))  
+    except Exception as e:
+        print(f"Error: {e}")
+        return "An error occurred", 500
+
 
 if __name__ == '__main__':
  init_db()

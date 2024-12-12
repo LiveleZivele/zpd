@@ -60,26 +60,34 @@
 </div>
 <div class="middle">
 <h3>Visvairāk pirktās grāmatas latviešu valodā</h3>
-
+<div class="AUGSA">
 <div class="slide-container">
-    <!-- First 6 books -->
+    <!-- pirmie 6-->
     <div class="books-container">
-      <div class="slider" id="slider1">
-        <div class="gramatas">
-          <div class="book-container">
-            {% for book in first_6_books %}
-              <div class="book-item">
-                <img src="{{ url_for('static', filename='photos/' + book[0]|string + '.jpg') }}" alt="{{ book[1] }}">
-                <p>{{ book[1] }}</p>
-                <div class="availability-dot" style="background-color: {{ 'green' if book[3] == 1 else 'red' }};"></div>
-                <button class="take-book-btn" data-book-id="{{ book[0] }}">Paņemt</button>
-              </div>
-            {% endfor %}
-          </div>
+        <div class="slider" id="slider1">
+            <div class="gramatas">
+                <div class="book-container">
+                    {% for book in first_6_books %}
+                    <div class="book-item">
+                        
+                        <img src="{{ url_for('static', filename='photos/' + book[0]|string + '.jpg') }}" alt="{{ book[1] }}">
+                        <p>{{ book[1] }}</p>
+                    
+                        <div class="availability-dot" style="background-color: {{ 'green' if book[3] == 1 else 'red' }};"></div>
+                        
+               
+                        <button class="take-book-btn" data-book-id="{{ book[0] }}">Paņemt</button>
+
+                        <form action="{{ url_for('add_to_wishlist') }}" method="POST" class="heart">
+                           <button type="submit" name="book_id" value="{{ book[0] }}">❤️</button>
+                        </form>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>  
-  </div>
+    </div>
+</div>
     <div class="slidebutton1">
         <button onclick="slideNext('slider1')"><b>←</b></button>
       </div>
@@ -87,26 +95,34 @@
         <button onclick="slideBack('slider1')"><b>→</b></button>
       </div>
     
-      &nbsp;
+</div>      
 
 <hr style="width: 95%; height: 0.5px; background-color: lightgray; border: none; margin-left: 0;">
 <h3>Jaunas grāmatas</h3>
-
+<div class="APAKSA">
 <div class="slide-container">
-    <!-- Last 6 books -->
+    <!-- pedejie 6 -->
     <div class="slider" id="slider2">
-      <div class="gramatas">
-        <div class="book-container">
-          {% for book in last_6_books %}
-          <div class="book-item">
-            <img src="{{ url_for('static', filename='photos/' + book[0]|string + '.jpg') }}" alt="{{ book[1] }}">
-            <p>{{ book[1] }}</p>
-            <div class="availability-dot" style="background-color: {{ 'green' if book[3] == 1 else 'red' }};"></div>
-            <button class="take-book-btn" data-book-id="{{ book[0] }}">Paņemt</button>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
+       <div class="gramatas">
+                <div class="book-container">
+                    {% for book in last_6_books %}
+                    <div class="book-item">
+                        
+                        <img src="{{ url_for('static', filename='photos/' + book[0]|string + '.jpg') }}" alt="{{ book[1] }}">
+                        <p>{{ book[1] }}</p>
+                        
+                        <div class="availability-dot" style="background-color: {{ 'green' if book[3] == 1 else 'red' }};"></div>
+                        
+                        
+                        <button class="take-book-btn" data-book-id="{{ book[0] }}">Paņemt</button>
+
+                        <form action="{{ url_for('add_to_wishlist') }}" method="POST" class="heart">
+                           <button type="submit" name="book_id" value="{{ book[0] }}">❤️ </button>
+                        </form>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
     </div>
     </div>
     <div class="slidebutton3">
@@ -116,9 +132,7 @@
         <button onclick="slideBack('slider2')"><b>→</b></button>
       </div>
     
-      &nbsp;
-
-
+</div>
 <script>
     let currentSlide = 0;
     const booksPerSlide = 3;  
@@ -180,9 +194,31 @@
       });
     });
   </script>
-  
+ <script>
+
+  document.querySelectorAll('.heart-button').forEach(button => {
+    button.addEventListener('click', function() {
+      let bookId = this.getAttribute('data-book-id');  
+      fetch('/add_to_wishlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ book_id: bookId })  
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          window.location.href = "/veloslasit";  
+        } else {
+          alert('Error adding to wishlist');
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  });
+</script>
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
 
-<!--<h6>> <a href="">    </a></h6>-->

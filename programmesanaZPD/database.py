@@ -40,11 +40,12 @@ def init_db():
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS velas_lasit_gramatas(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            ielikts_saraksta TEXT NOT NULL,
+            ielikts_saraksta TEXT NOT NULL DEFAULT (datetime('now')),
             id_lietotajs INTEGER NOT NULL,
             id_gramata INTEGER NOT NULL,
             FOREIGN KEY (id_gramata) REFERENCES gramata(id),
             FOREIGN KEY (id_lietotajs) REFERENCES lietotajs(id)
+           
         )
     ''')
     cursor.execute('''
@@ -57,14 +58,6 @@ def init_db():
             id_gramata INTEGER NOT NULL,
             FOREIGN KEY (id_lietotajs) REFERENCES lietotajs(id),
             FOREIGN KEY (id_gramata) REFERENCES gramata(id)
-        )
-    ''')
-
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS saturs(
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            id_gr_noma INTEGER NOT NULL,
-            FOREIGN KEY (id_gr_noma) REFERENCES gr_noma(id)
         )
     ''')
     conn.commit()

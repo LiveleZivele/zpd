@@ -1,9 +1,9 @@
-// Check if the dark mode preference is stored in localStorage
+// tumsais rezims
 const themeToggleButton = document.getElementById('theme-toggle');
 const body = document.body;
 const currentTheme = localStorage.getItem('theme');
 
-// If dark mode was previously saved, apply it
+
 if (currentTheme === 'dark') {
     body.classList.add('dark-theme');
     themeToggleButton.innerHTML = '<h4>Gaišais režīms</h4>';
@@ -12,16 +12,65 @@ if (currentTheme === 'dark') {
     themeToggleButton.innerHTML = '<h4>Tumšais režīms</h4>';
 }
 
-// Toggle dark/light theme when the button is clicked
+
 themeToggleButton.addEventListener('click', () => {
     body.classList.toggle('dark-theme');
     
-    // Update the button text based on the current theme
+   
     if (body.classList.contains('dark-theme')) {
         themeToggleButton.innerHTML = '<h4>Gaišais režīms</h4>';
-        localStorage.setItem('theme', 'dark'); // Save the dark mode preference
+        localStorage.setItem('theme', 'dark'); 
     } else {
         themeToggleButton.innerHTML = '<h4>Tumšais režīms</h4>';
-        localStorage.setItem('theme', 'light'); // Save the light mode preference
+        localStorage.setItem('theme', 'light'); 
     }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const heartButtons = document.querySelectorAll(".heart-button");
+
+    heartButtons.forEach(button => {
+      button.addEventListener("click", function() {
+        const bookId = this.getAttribute("data-book-id");
+
+        fetch('/add_to_wishlist', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ book_id: bookId }),
+        })
+        .then(response => {
+          if (response.ok) {
+            alert("Book added to wishlist!");
+            window.location.href = "/veloslasit"; 
+          } else {
+            alert("Failed to add book to wishlist.");
+          }
+        });
+      });
+    });
+  });
+  fetch('/add_to_wishlist', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ book_id: bookId }),
+})
+.then(response => response.json())
+.then(data => {
+    if (data.message === 'Book added to wishlist' || data.message === 'Book removed from wishlist') {
+       
+        this.style.color = this.style.color === 'green' ? 'red' : 'green';
+        alert(data.message); 
+
+      
+        window.location.href = '/wishlist'; 
+    } else {
+        alert("An error occurred: " + data.error);
+    }
+})
+.catch(error => {
+    alert("Failed to update wishlist: " + error);
 });
